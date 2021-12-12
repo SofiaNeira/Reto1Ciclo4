@@ -52,7 +52,7 @@ public class UserWeb {
         User user = servicios.getExistsEmailAndPassword(email, password);
         if (user == null) {
 
-            User noUser = new User(null, "NO DEFINIDO", null, null);
+            User noUser = new User(null, email, "NO DEFINIDO", password);
 
             return noUser;
         }
