@@ -23,33 +23,51 @@ public class serviciosUser {
     private UserRepositorio metodosCrud;
     
 
-    
+    /**
+     * Listar todos los usuarios
+     * @return 
+     */
     public List<User> getAll(){
         return metodosCrud.getAll();
     }
     
+    /**
+     * Listar usuarios por ID
+     * @param id
+     * @return 
+     */
     public Optional<User> getUser(int id){
         return metodosCrud.getUser(id);
     }
-
+    
+    /**
+     * Buscar email existente
+     * @param email
+     * @return 
+     */
     public boolean getExistsEmail(String email){
         return metodosCrud.getExistsEmail(email);
     }
     
+    /**
+     * Buscar combinación Email-contraseña
+     * @param email
+     * @param password
+     * @return 
+     */
     public User getExistsEmailAndPassword(String email, String password){
         
         return metodosCrud.getExistsEmailAndPassword(email,password);
     }
 
-    
+    /**
+     * Crear nuevo usuario
+     * @param user
+     * @return
+     * @throws Exception 
+     */
     public User save(User user) throws Exception{
         
-        /*
-        Optional<User> userFound = metodosCrud.getFindByEmail(user.getEmail());
-        if(userFound.isPresent()){
-            throw new Exception("El correo ya existe");
-        }else{
-        */
         try {
             if(user.getId()==null){
                 return metodosCrud.save(user);
@@ -72,6 +90,11 @@ public class serviciosUser {
         
     }
     
+    /**
+     * Actualizar datos de usuario
+     * @param user
+     * @return 
+     */
     public User update(User user){
         if (user.getId()!=null){
             Optional<User> evt = metodosCrud.getUser(user.getId());
@@ -95,7 +118,11 @@ public class serviciosUser {
         }
     }
     
-    
+    /**
+     * Eliminar Usuario
+     * @param id
+     * @return 
+     */
     public boolean deleteUser(int id){
         Boolean del = getUser(id).map(user -> {
             metodosCrud.delete(user);
